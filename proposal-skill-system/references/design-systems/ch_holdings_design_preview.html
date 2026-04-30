@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CH Holdings — Design System Preview</title>
+<style>
+  :root {
+    --color-main: #1A1A1A;
+    --color-accent: #0EBAB5;
+    --color-accent-light: #E0F7F6;
+    --color-warning: #E04E49;
+    --color-warning-light: #FCE8E7;
+    --color-sub: #F2F2F2;
+    --color-text-secondary: #555555;
+    --color-border: #C0C0C0;
+    --color-white: #FFFFFF;
+    --font-family: 'Hiragino Sans', 'Yu Gothic UI', 'Noto Sans JP', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-family);
+    color: var(--color-main);
+    background: #FAFAFA;
+    line-height: 1.6;
+    font-size: 14px;
+  }
+
+  /* === HERO === */
+  .hero {
+    background: var(--color-main);
+    color: var(--color-white);
+    padding: 80px 60px 60px;
+    position: relative;
+  }
+  .hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .hero h1 .accent { color: var(--color-accent); }
+  .hero .subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.05em;
+    margin-bottom: 32px;
+  }
+  .hero .meta {
+    display: flex;
+    gap: 32px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+  }
+  .hero .meta strong { color: var(--color-accent); display: block; font-size: 11px; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .hero-band {
+    height: 8px;
+    background: var(--color-accent);
+  }
+
+  /* === SECTION === */
+  section {
+    padding: 60px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .section-header {
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-accent);
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .section-header .num {
+    font-size: 14px;
+    color: var(--color-accent);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+  .section-header h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--color-main);
+  }
+  .section-lead {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    margin-bottom: 32px;
+    max-width: 700px;
+  }
+
+  /* === COLOR PALETTE === */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .color-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .color-swatch {
+    height: 140px;
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+    color: var(--color-white);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+  }
+  .color-swatch.dark-text { color: var(--color-main); }
+  .color-info {
+    padding: 16px;
+  }
+  .color-info .role {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .color-info .hex {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-bottom: 8px;
+  }
+  .color-info .usage {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+  }
+
+  .ratio-bar {
+    display: flex;
+    height: 32px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 24px;
+    border: 1px solid var(--color-border);
+  }
+  .ratio-segment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-main);
+  }
+
+  /* === TYPOGRAPHY === */
+  .type-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 180px;
+    gap: 32px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--color-sub);
+    align-items: baseline;
+  }
+  .type-row:last-child { border-bottom: none; }
+  .type-label {
+    font-size: 11px;
+    color: var(--color-accent);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+  .type-meta {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--color-text-secondary);
+  }
+  .type-sample-title-slide { font-size: 44px; font-weight: 700; }
+  .type-sample-slide-title { font-size: 26px; font-weight: 700; color: var(--color-accent); }
+  .type-sample-lead { font-size: 18px; font-weight: 600; }
+  .type-sample-body { font-size: 15px; }
+  .type-sample-caption { font-size: 11px; color: var(--color-text-secondary); }
+  .type-sample-number { font-size: 32px; font-weight: 700; color: var(--color-accent); }
+
+  /* === COMPONENTS === */
+  .component-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .component-block {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 24px;
+  }
+  .component-block-title {
+    font-size: 11px;
+    color: var(--color-accent);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  /* Card variants */
+  .card-standard {
+    background: var(--color-sub);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .card-standard-header {
+    background: var(--color-main);
+    color: var(--color-white);
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .card-standard-body {
+    padding: 20px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+  }
+
+  .card-warning {
+    background: var(--color-warning-light);
+    border-top: 4px solid var(--color-warning);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .card-warning-header {
+    background: var(--color-warning);
+    color: var(--color-white);
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .card-warning-body {
+    padding: 20px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+  }
+
+  .quote-box {
+    background: var(--color-accent-light);
+    border-left: 4px solid var(--color-accent);
+    padding: 16px 24px;
+    font-size: 13px;
+    color: var(--color-main);
+  }
+  .quote-box .quote-mark {
+    color: var(--color-accent);
+    font-size: 20px;
+    font-weight: 700;
+    margin-right: 8px;
+  }
+
+  .step-icons {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .step-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-main);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .step-icon.accent { background: var(--color-accent); }
+  .step-arrow { color: var(--color-accent); font-size: 16px; }
+
+  .kpi-block {
+    display: flex;
+    gap: 24px;
+    align-items: baseline;
+  }
+  .kpi-value {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+  .kpi-label {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+  }
+
+  /* === SAMPLE SLIDE === */
+  .sample-slide {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    aspect-ratio: 16 / 9;
+    padding: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .sample-slide-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-accent);
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-accent);
+    margin-bottom: 16px;
+  }
+  .sample-slide-lead {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-bottom: 20px;
+  }
+  .sample-slide-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .sample-slide-card {
+    background: var(--color-sub);
+    border-radius: 4px;
+    padding: 16px;
+    font-size: 11px;
+  }
+  .sample-slide-card-header {
+    background: var(--color-main);
+    color: var(--color-white);
+    margin: -16px -16px 12px;
+    padding: 8px 12px;
+    font-weight: 700;
+    border-radius: 4px 4px 0 0;
+  }
+  .sample-slide-card.warning .sample-slide-card-header {
+    background: var(--color-warning);
+  }
+  .sample-slide-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .sample-slide-footer-text {
+    padding: 6px 40px;
+    font-size: 9px;
+    color: var(--color-text-secondary);
+    display: flex;
+    justify-content: space-between;
+  }
+  .sample-slide-footer-band {
+    height: 4px;
+    background: var(--color-accent);
+  }
+
+  /* === DO/DONT === */
+  .rules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .rules-block {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 24px;
+  }
+  .rules-block.do {
+    border-top: 4px solid var(--color-accent);
+  }
+  .rules-block.dont {
+    border-top: 4px solid var(--color-warning);
+  }
+  .rules-block h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .rules-block.do h3 { color: var(--color-accent); }
+  .rules-block.dont h3 { color: var(--color-warning); }
+  .rules-block ul {
+    list-style: none;
+    padding: 0;
+  }
+  .rules-block li {
+    padding: 8px 0 8px 24px;
+    font-size: 13px;
+    position: relative;
+    border-bottom: 1px dashed var(--color-sub);
+  }
+  .rules-block li:last-child { border-bottom: none; }
+  .rules-block.do li::before {
+    content: '✓';
+    color: var(--color-accent);
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+  }
+  .rules-block.dont li::before {
+    content: '✗';
+    color: var(--color-warning);
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+  }
+
+  /* === FOOTER === */
+  footer {
+    background: var(--color-main);
+    color: var(--color-white);
+    padding: 40px 60px;
+    margin-top: 60px;
+  }
+  .footer-band {
+    height: 8px;
+    background: var(--color-accent);
+  }
+  footer .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  footer .footer-text {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+  }
+  footer .footer-brand {
+    font-size: 11px;
+    color: var(--color-accent);
+    letter-spacing: 0.1em;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="subtitle">DESIGN SYSTEM PREVIEW</div>
+  <h1>CH Holdings <span class="accent">Pitch Deck</span></h1>
+  <h1>Design <span class="accent">System.</span></h1>
+  <div class="meta" style="margin-top: 32px;">
+    <div><strong>SOURCE</strong>CH_Holdings_11th_Company_Pitch_ver1_1.pdf</div>
+    <div><strong>OWNER</strong>KANDO Marketing</div>
+    <div><strong>GENERATED</strong>2026-04-30</div>
+  </div>
+</header>
+<div class="hero-band"></div>
+
+<!-- ===== SECTION 1: COLOR ===== -->
+<section>
+  <div class="section-header">
+    <span class="num">01</span>
+    <h2>カラーパレット</h2>
+  </div>
+  <p class="section-lead">メイン4色 + 補助2色で構成。アクセント（ティール）は10%ルールを死守し、Warning（赤）は課題・機会損失の局所強調に限定使用する。</p>
+
+  <div class="color-grid">
+    <div class="color-card">
+      <div class="color-swatch" style="background: #1A1A1A;">#1A1A1A</div>
+      <div class="color-info">
+        <div class="role">Main</div>
+        <div class="hex">RGB 26, 26, 26</div>
+        <div class="usage">テキスト・タイトル背景・ダーク帯</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background: #0EBAB5;">#0EBAB5</div>
+      <div class="color-info">
+        <div class="role">Accent</div>
+        <div class="hex">RGB 14, 186, 181</div>
+        <div class="usage">タイトル・フッター帯・強調・引用</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background: #E04E49;">#E04E49</div>
+      <div class="color-info">
+        <div class="role">Warning</div>
+        <div class="hex">RGB 224, 78, 73</div>
+        <div class="usage">課題・リスク・機会損失</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch dark-text" style="background: #F2F2F2;">#F2F2F2</div>
+      <div class="color-info">
+        <div class="role">Sub</div>
+        <div class="hex">RGB 242, 242, 242</div>
+        <div class="usage">カード背景・セクション仕切り</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-lead" style="margin-top: 40px; margin-bottom: 8px; font-size: 13px;"><strong>使用比率の目安</strong></p>
+  <div class="ratio-bar">
+    <div class="ratio-segment" style="background: #FFFFFF; flex: 60; border-right: 1px solid #C0C0C0;">White 60%</div>
+    <div class="ratio-segment" style="background: #1A1A1A; color: #FFFFFF; flex: 25;">Main 25%</div>
+    <div class="ratio-segment" style="background: #0EBAB5; color: #FFFFFF; flex: 10;">Accent 10%</div>
+    <div class="ratio-segment" style="background: #E04E49; color: #FFFFFF; flex: 3;">3%</div>
+    <div class="ratio-segment" style="background: #F2F2F2; flex: 2;">2%</div>
+  </div>
+</section>
+
+<!-- ===== SECTION 2: TYPOGRAPHY ===== -->
+<section>
+  <div class="section-header">
+    <span class="num">02</span>
+    <h2>タイポグラフィ</h2>
+  </div>
+  <p class="section-lead">Hiragino Sans / Yu Gothic UI 系のゴシック体で誠実さと切れ味を出す。明朝体・装飾系フォントは使わない。</p>
+
+  <div class="type-row">
+    <span class="type-label">TITLE SLIDE</span>
+    <div class="type-sample-title-slide">映像を、<span style="color: #E8D9A8;">なんでしょうか。</span></div>
+    <span class="type-meta">44-56px / 700</span>
+  </div>
+  <div class="type-row">
+    <span class="type-label">SLIDE TITLE</span>
+    <div class="type-sample-slide-title">課題①：映像の影響結果が、作り手に戻ってこない構造</div>
+    <span class="type-meta">26px / 700</span>
+  </div>
+  <div class="type-row">
+    <span class="type-label">LEAD</span>
+    <div class="type-sample-lead">作品づくりの先には、必ず誰かに何かを感じてほしいという願いがある。</div>
+    <span class="type-meta">18px / 600</span>
+  </div>
+  <div class="type-row">
+    <span class="type-label">BODY</span>
+    <div class="type-sample-body">ウェブアンケートやブランドリフト調査、サイト分析などを活用すれば、作品が消費者の心にどのように届き、どんな影響を与えたのかをデータにもとづいて明らかにすることができます。</div>
+    <span class="type-meta">15px / 400</span>
+  </div>
+  <div class="type-row">
+    <span class="type-label">NUMBER</span>
+    <div class="type-sample-number">+2,000万円</div>
+    <span class="type-meta">32-48px / 700 / Accent</span>
+  </div>
+  <div class="type-row">
+    <span class="type-label">CAPTION</span>
+    <div class="type-sample-caption">CH Holdings / 2026  —  3 / 11</div>
+    <span class="type-meta">11-13px / 400</span>
+  </div>
+</section>
+
+<!-- ===== SECTION 3: COMPONENTS ===== -->
+<section>
+  <div class="section-header">
+    <span class="num">03</span>
+    <h2>コンポーネント</h2>
+  </div>
+  <p class="section-lead">スライド内で繰り返し使用する基本コンポーネント群。これらを組み合わせるだけで CH Holdings 提案資料のトーンを再現できる。</p>
+
+  <div class="component-grid">
+    <div class="component-block">
+      <div class="component-block-title">Standard Card</div>
+      <div class="card-standard">
+        <div class="card-standard-header">① 配信は代理店が自社で担う</div>
+        <div class="card-standard-body">効果データは、代理店側に集約されて、そこに留まりやすい構造になっています。</div>
+      </div>
+    </div>
+
+    <div class="component-block">
+      <div class="component-block-title">Warning Card</div>
+      <div class="card-warning">
+        <div class="card-warning-header">③ 作り手に答えが戻らない</div>
+        <div class="card-warning-body">作品を一番深く理解しているはずの皆さまのところまで、肝心の効いたかが届かないまま。</div>
+      </div>
+    </div>
+
+    <div class="component-block">
+      <div class="component-block-title">Quote Box</div>
+      <div class="quote-box">
+        <span class="quote-mark">❝</span>クライアントが本当に求めているのは映像そのものではなく、その先にあるビジネスの結果。
+      </div>
+    </div>
+
+    <div class="component-block">
+      <div class="component-block-title">Step Icons</div>
+      <div class="step-icons">
+        <div class="step-icon">01</div>
+        <span class="step-arrow">▶</span>
+        <div class="step-icon accent">02</div>
+        <span class="step-arrow">▶</span>
+        <div class="step-icon accent">03</div>
+      </div>
+    </div>
+
+    <div class="component-block">
+      <div class="component-block-title">KPI Block</div>
+      <div class="kpi-block">
+        <div>
+          <div class="kpi-value">1,200<span style="font-size: 24px;">+</span></div>
+          <div class="kpi-label">累計受講者</div>
+        </div>
+        <div>
+          <div class="kpi-value">4.7</div>
+          <div class="kpi-label">平均満足度</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="component-block">
+      <div class="component-block-title">Footer Band</div>
+      <div style="margin-top: 40px;">
+        <div style="display: flex; justify-content: space-between; padding: 4px 0; font-size: 11px; color: var(--color-text-secondary);">
+          <span>CH Holdings / 2026</span>
+          <span>3 / 11</span>
+        </div>
+        <div style="height: 8px; background: var(--color-accent); margin-top: 4px;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 4: SAMPLE SLIDE ===== -->
+<section>
+  <div class="section-header">
+    <span class="num">04</span>
+    <h2>サンプルスライド</h2>
+  </div>
+  <p class="section-lead">標準的な「白背景＋ティールタイトル＋3カラム」レイアウトの再現プレビュー。</p>
+
+  <div class="sample-slide">
+    <div class="sample-slide-title">課題①：映像の影響結果が、作り手に戻ってこない構造</div>
+    <div class="sample-slide-lead">動画広告の配信は、ほぼすべて広告代理店さんのお手元。効果データも代理店側に集まり滞留しやすい構造です。</div>
+    <div class="sample-slide-body">
+      <div class="sample-slide-card">
+        <div class="sample-slide-card-header">① 配信は代理店</div>
+        効果データは代理店側に集約され、留まりやすい構造。
+      </div>
+      <div class="sample-slide-card">
+        <div class="sample-slide-card-header">② 検証リテラシー</div>
+        レポートの良し悪しを判断する物差しを持つクライアントは少数。
+      </div>
+      <div class="sample-slide-card warning">
+        <div class="sample-slide-card-header">③ 作り手に答えが戻らない</div>
+        作品を一番深く理解しているはずの皆さまに届かない。
+      </div>
+    </div>
+    <div class="sample-slide-footer">
+      <div class="sample-slide-footer-text">
+        <span>CH Holdings / 2026</span>
+        <span>5 / 11</span>
+      </div>
+      <div class="sample-slide-footer-band"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 5: RULES ===== -->
+<section>
+  <div class="section-header">
+    <span class="num">05</span>
+    <h2>DO / DON'T</h2>
+  </div>
+
+  <div class="rules-grid">
+    <div class="rules-block do">
+      <h3>✓ やってOK</h3>
+      <ul>
+        <li>Accent色を全ページに必ず1箇所以上入れる（フッター帯で担保）</li>
+        <li>数字は大きく・太く・Accent色で</li>
+        <li>引用・問いかけは ❝ で柔らかく</li>
+        <li>余白を恐れずに使う（外側マージン60px）</li>
+        <li>タイトルスライドは黒背景で締める</li>
+      </ul>
+    </div>
+    <div class="rules-block dont">
+      <h3>✗ やってNG</h3>
+      <ul>
+        <li>紫グラデーションは絶対に使わない</li>
+        <li>Accent色を本文中に多用しない（10%ルール）</li>
+        <li>明朝体・装飾系フォントは使わない</li>
+        <li>1スライドに3色以上のアクセントを入れない</li>
+        <li>カード背景にAccent色を使わない（薄ティールならOK）</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer-band"></div>
+<footer>
+  <div class="footer-content">
+    <div class="footer-text">CH Holdings — Pitch Deck Design System</div>
+    <div class="footer-brand">KANDO MARKETING / 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>

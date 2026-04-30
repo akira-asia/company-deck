@@ -1,0 +1,48 @@
+# =============================================================
+# 案件メタデータ
+# =============================================================
+# このファイルは案件のメタデータを管理するための標準フォーマット。
+# tags.yml の辞書に従って表記ゆれを防ぐこと。
+# =============================================================
+
+# --- 基本情報 ---
+client: ""                       # クライアント名（例: "Lucido-L"）
+brand: ""                        # ブランド名（例: "Re:"）
+industry: ""                     # 業界（tags.yml の industry を参照）
+bm_type: ""                      # ビジネスモデル型（tags.yml の bm_type を参照）
+
+# --- 案件規模 ---
+deal_size: ""                    # S / M / L / XL（tags.yml参照）
+budget_jpy: 0                    # 予算（円・税抜）
+duration_months: 0               # 案件期間（月）
+
+# --- フェーズ管理 ---
+phase: "提案中"                  # 提案中 / 受注 / 失注 / 保留 / 進行中 / 完了
+proposal_date: "2026-XX-XX"      # 提案日
+decision_date: ""                # 結果確定日（受注/失注決定日）
+launch_date: ""                  # 案件開始日（受注時のみ）
+
+# --- 使用Skills ---
+skills_used:
+  - ""                           # 例: presales-analyzer
+  - ""                           # 例: segment-design-doc
+  - ""                           # 例: bm-strategy-advisor
+
+# --- 結果評価 ---
+score: 0                         # 1〜5点（自己評価）
+win_factors: []                  # 受注要因（受注時のみ）
+  # - 競合分析の深さ
+  # - ペルソナ解像度
+lose_factors: []                 # 失注要因（失注時のみ）
+  # - 価格競争力
+  # - 提案タイミング
+
+# --- 流用可能アセット ---
+key_assets: []                   # 他案件への流用可能パーツ
+  # - deck/05_segment-matrix.html
+  # - 02_strategy/positioning-10.md
+
+# --- 関連情報 ---
+related_proposals: []            # 関連する過去案件
+team_members: []                 # 担当メンバー
+notes: ""                        # 自由記述
